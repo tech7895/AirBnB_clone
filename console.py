@@ -13,7 +13,7 @@ from models.amenity import Amenity
 from models.review import Review
 
 
-def parse(arg):
+def parser(arg):
     curly_bracesMatch = re.search(r"\{(.*?)\}", arg)
     brackets = re.search(r"\[(.*?)\]", arg)
     if curly_bracesMatch is None:
@@ -89,7 +89,7 @@ class my_command(cmd.Cmd):
         """Usage: create <class>
         Creates a new class instance and print its id.
         """
-        args_lst = parse(arg)
+        args_lst = parser(arg)
         if len(args_lst) == 0:
             print("** class name missing **")
         elif args_lst[0] not in my_command.__classes:
@@ -103,7 +103,7 @@ class my_command(cmd.Cmd):
         Displays the string representation of a class instance of
         a given id.
         """
-        args_lst = parse(arg)
+        args_lst = parser(arg)
         obj_dict = storage.all()
         if len(args_lst) == 0:
             print("** class name missing **")
@@ -119,7 +119,7 @@ class my_command(cmd.Cmd):
     def do_destroy(self, arg):
         """Usage: destroy <class> <id> or <class>.destroy(<id>)
         Deletes a class instance of a given id."""
-        args_lst = parse(arg)
+        args_lst = parser(arg)
         obj_dict = storage.all()
         if len(args_lst) == 0:
             print("** class name missing **")
@@ -137,7 +137,7 @@ class my_command(cmd.Cmd):
         """Usage: all or all <class> or <class>.all()
         Displays a string representations of all instances of a given class.
         If no class is specified, displays all instantiated objects."""
-        args_lst = parse(arg)
+        args_lst = parser(arg)
         if len(args_lst) > 0 and args_lst[0] not in my_command.__classes:
             print("** class doesn't exist **")
         else:
@@ -152,7 +152,7 @@ class my_command(cmd.Cmd):
     def do_count(self, arg):
         """Usage: count <class> or <class>.count()
         Retrieves the number of instances of a given class."""
-        args_lst = parse(arg)
+        args_lst = parser(arg)
         count = 0
         for obj in storage.all().values():
             if args_lst[0] == obj.__class__.__name__:
@@ -165,7 +165,7 @@ class my_command(cmd.Cmd):
        <class>.update(<id>, <dictionary>)
         Updates a class instance of a given id by adding or updating
         a given attribute key/value pair or dictionary."""
-        args_lst = parse(arg)
+        args_lst = parser(arg)
         obj_dict = storage.all()
 
         if len(args_lst) == 0:
