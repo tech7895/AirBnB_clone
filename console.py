@@ -13,7 +13,7 @@ from models.amenity import Amenity
 from models.review import Review
 
 
-def parser(arg):
+def parse(arg):
     curly_bracesMatch = re.search(r"\{(.*?)\}", arg)
     brackets = re.search(r"\[(.*?)\]", arg)
     if curly_bracesMatch is None:
@@ -32,7 +32,7 @@ def parser(arg):
 
 
 class my_command(cmd.Cmd):
-    """The script defines the custom HBnB command
+    """The script defines the HBnB command
     interpreter.
 
     Attributes:
@@ -50,7 +50,7 @@ class my_command(cmd.Cmd):
         "Review"
     }
 
-    def empty_line(self):
+    def emptyline(self):
         """This does nothing upon receiving an empty line."""
         pass
 
@@ -62,14 +62,14 @@ class my_command(cmd.Cmd):
             "show": self.do_show,
             "destroy": self.do_destroy,
             "count": self.do_count,
-            "update": self.make_update
+            "update": self.do_update
         }
-        cmd_match = re.search(r"\.", arg)
-        if cmd_match is not None:
-            args_lst = [arg[:cmd_match.span()[0]], arg[cmd_match.span()[1]:]]
-            cmd_match = re.search(r"\((.*?)\)", args_lst[1])
-            if cmd_match is not None:
-                command = [args_lst[1][:cmd_match.span()[0]], cmd_match.group()[1:-1]]
+        match = re.search(r"\.", arg)
+        if match is not None:
+            args_lst = [arg[:match.span()[0]], arg[match.span()[1]:]]
+            match = re.search(r"\((.*?)\)", args_lst[1])
+            if match is not None:
+                command = [args_lst[1][:match.span()[0]], match.group()[1:-1]]
                 if command[0] in argdict.keys():
                     call = "{} {}".format(args_lst[0], command[1])
                     return argdict[command[0]](call)
@@ -89,7 +89,7 @@ class my_command(cmd.Cmd):
         """Usage: create <class>
         Creates a new class instance and print its id.
         """
-        args_lst = parser(arg)
+        args_lst = parse(arg)
         if len(args_lst) == 0:
             print("** class name missing **")
         elif args_lst[0] not in my_command.__classes:
@@ -103,7 +103,7 @@ class my_command(cmd.Cmd):
         Displays the string representation of a class instance of
         a given id.
         """
-        args_lst = parser(arg)
+        args_lst = parse(arg)
         obj_dict = storage.all()
         if len(args_lst) == 0:
             print("** class name missing **")
@@ -119,7 +119,7 @@ class my_command(cmd.Cmd):
     def do_destroy(self, arg):
         """Usage: destroy <class> <id> or <class>.destroy(<id>)
         Deletes a class instance of a given id."""
-        args_lst = parser(arg)
+        args_lst = parse(arg)
         obj_dict = storage.all()
         if len(args_lst) == 0:
             print("** class name missing **")
@@ -137,7 +137,7 @@ class my_command(cmd.Cmd):
         """Usage: all or all <class> or <class>.all()
         Displays a string representations of all instances of a given class.
         If no class is specified, displays all instantiated objects."""
-        args_lst = parser(arg)
+        args_lst = parse(arg)
         if len(args_lst) > 0 and args_lst[0] not in my_command.__classes:
             print("** class doesn't exist **")
         else:
@@ -152,20 +152,20 @@ class my_command(cmd.Cmd):
     def do_count(self, arg):
         """Usage: count <class> or <class>.count()
         Retrieves the number of instances of a given class."""
-        args_lst = parser(arg)
+        args_lst = parse(arg)
         count = 0
         for obj in storage.all().values():
             if args_lst[0] == obj.__class__.__name__:
                 count += 1
         print(count)
 
-    def make_update(self, arg):
+    def do_update(self, arg):
         """Usage: update <class> <id> <attribute_name> <attribute_value> or
        <class>.update(<id>, <attribute_name>, <attribute_value>) or
        <class>.update(<id>, <dictionary>)
         Updates a class instance of a given id by adding or updating
         a given attribute key/value pair or dictionary."""
-        args_lst = parser(arg)
+        args_lst = parse(arg)
         obj_dict = storage.all()
 
         if len(args_lst) == 0:
