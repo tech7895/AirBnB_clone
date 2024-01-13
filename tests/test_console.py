@@ -143,7 +143,7 @@ class Test_cmd_create(unittest.TestCase):
             pass
 
     def test_create_missing_class(self):
-       k = "** class name missing **"
+        k = "** class name missing **"
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("create"))
             self.assertEqual(k, output.getvalue().strip())
