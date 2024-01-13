@@ -32,7 +32,7 @@ def parse(arg):
 
 
 class my_command(cmd.Cmd):
-    """The script defines the HBnB command
+    """The script defines the custom HBnB command
     interpreter.
 
     Attributes:
@@ -50,7 +50,7 @@ class my_command(cmd.Cmd):
         "Review"
     }
 
-    def emptyline(self):
+    def empty_line(self):
         """This does nothing upon receiving an empty line."""
         pass
 
