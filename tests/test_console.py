@@ -2,7 +2,7 @@
 """The script defines unittests for console.py.
 
 Unittest classes:
-    Testmy_command_prompting
+    Test_cmd_prmpt
     Testmy_command_help
     Testmy_command_exit
     Testmy_command_create
@@ -21,7 +21,7 @@ from io import StringIO
 from unittest.mock import patch
 
 
-class Testmy_command_prompting(unittest.TestCase):
+class Test_cmd_prmpt(unittest.TestCase):
     """This unittests for testing prompting of the HBNB command interpreter."""
 
     def test_prompt_string(self):
