@@ -64,12 +64,12 @@ class my_command(cmd.Cmd):
             "count": self.do_count,
             "update": self.make_update
         }
-        match = re.search(r"\.", arg)
-        if match is not None:
-            args_lst = [arg[:match.span()[0]], arg[match.span()[1]:]]
-            match = re.search(r"\((.*?)\)", args_lst[1])
-            if match is not None:
-                command = [args_lst[1][:match.span()[0]], match.group()[1:-1]]
+        cmd_match = re.search(r"\.", arg)
+        if cmd_match is not None:
+            args_lst = [arg[:cmd_match.span()[0]], arg[cmd_match.span()[1]:]]
+            cmd_match = re.search(r"\((.*?)\)", args_lst[1])
+            if cmd_match is not None:
+                command = [args_lst[1][:cmd_match.span()[0]], cmd_match.group()[1:-1]]
                 if command[0] in argdict.keys():
                     call = "{} {}".format(args_lst[0], command[1])
                     return argdict[command[0]](call)
