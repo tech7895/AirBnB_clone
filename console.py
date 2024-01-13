@@ -14,9 +14,9 @@ import cmd
 
 
 def parse(arg):
-    curly_bracesMatch = re.search(r"\{(.*?)\}", arg)
+    curly_bracesMatchMatch = re.search(r"\{(.*?)\}", arg)
     brackets = re.search(r"\[(.*?)\]", arg)
-    if curly_bracesMatch is None:
+    if curly_bracesMatchMatch is None:
         if brackets is None:
             return [i.strip(",") for i in split(arg)]
         else:
@@ -25,9 +25,9 @@ def parse(arg):
             result_lst.append(brackets.group())
             return result_lst
     else:
-        lexer = split(arg[:curly_bracesMatch.span()[0]])
+        lexer = split(arg[:curly_bracesMatchMatch.span()[0]])
         result_lst = [i.strip(",") for i in lexer]
-        result_lst.append(curly_bracesMatch.group())
+        result_lst.append(curly_bracesMatchMatch.group())
         return result_lst
 
 
