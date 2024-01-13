@@ -62,7 +62,7 @@ class my_command(cmd.Cmd):
             "show": self.do_show,
             "destroy": self.do_destroy,
             "count": self.do_count,
-            "update": self.do_update
+            "update": self.make_update
         }
         match = re.search(r"\.", arg)
         if match is not None:
@@ -159,7 +159,7 @@ class my_command(cmd.Cmd):
                 count += 1
         print(count)
 
-    def do_update(self, arg):
+    def make_update(self, arg):
         """Usage: update <class> <id> <attribute_name> <attribute_value> or
        <class>.update(<id>, <attribute_name>, <attribute_value>) or
        <class>.update(<id>, <dictionary>)
