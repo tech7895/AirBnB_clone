@@ -22,7 +22,8 @@ from unittest.mock import patch
 
 
 class Test_cmd_prmpt(unittest.TestCase):
-    """This unittests for testing prompting of the HBNB command interpreter."""
+    """This unittests for testing prompting of the HBNB command
+    interpreter."""
 
     def test_prompt_string(self):
         self.assertEqual("(hbnb) ", my_command.prompt)
@@ -38,72 +39,72 @@ class Test_cmd_help(unittest.TestCase):
     interpreter."""
 
     def test_help_quit(self):
-        h = "Quit command to exit the program."
+        k = "Quit command to exit the program."
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("help quit"))
-            self.assertEqual(h, output.getvalue().strip())
+            self.assertEqual(k, output.getvalue().strip())
 
     def test_help_create(self):
-        h = ("Usage: create <class>\n        "
+        k = ("Usage: create <class>\n        "
              "Create a new class instance and print its id.")
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("help create"))
-            self.assertEqual(h, output.getvalue().strip())
+            self.assertEqual(k, output.getvalue().strip())
 
     def test_help_EOF(self):
-        h = "EOF signal to exit the program."
+        k = "EOF signal to exit the program."
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("help EOF"))
-            self.assertEqual(h, output.getvalue().strip())
+            self.assertEqual(k, output.getvalue().strip())
 
     def test_help_show(self):
-        h = ("Usage: show <class> <id> or <class>.show(<id>)\n        "
+        k = ("Usage: show <class> <id> or <class>.show(<id>)\n        "
              "Display the string representation of a class instance of"
              " a given id.")
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("help show"))
-            self.assertEqual(h, output.getvalue().strip())
+            self.assertEqual(k, output.getvalue().strip())
 
     def test_help_destroy(self):
-        h = ("Usage: destroy <class> <id> or <class>.destroy(<id>)\n        "
+        k = ("Usage: destroy <class> <id> or <class>.destroy(<id>)\n        "
              "Delete a class instance of a given id.")
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("help destroy"))
-            self.assertEqual(h, output.getvalue().strip())
+            self.assertEqual(k, output.getvalue().strip())
 
     def test_help_all(self):
-        h = ("Usage: all or all <class> or <class>.all()\n        "
+        k = ("Usage: all or all <class> or <class>.all()\n        "
              "Display string representations of all instances of a given class"
              ".\n        If no class is specified, displays all instantiated "
              "objects.")
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("help all"))
-            self.assertEqual(h, output.getvalue().strip())
+            self.assertEqual(k, output.getvalue().strip())
 
     def test_help_count(self):
-        h = ("Usage: count <class> or <class>.count()\n        "
+        k = ("Usage: count <class> or <class>.count()\n        "
              "Retrieve the number of instances of a given class.")
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("help count"))
-            self.assertEqual(h, output.getvalue().strip())
+            self.assertEqual(k, output.getvalue().strip())
 
     def test_help_update(self):
-        h = ("Usage: update <class> <id> <attribute_name> <attribute_value> or"
+        k = ("Usage: update <class> <id> <attribute_name> <attribute_value> or"
              "\n       <class>.update(<id>, <attribute_name>, <attribute_value"
              ">) or\n       <class>.update(<id>, <dictionary>)\n        "
              "Update a class instance of a given id by adding or updating\n   "
              "     a given attribute key/value pair or dictionary.")
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("help update"))
-            self.assertEqual(h, output.getvalue().strip())
+            self.assertEqual(k, output.getvalue().strip())
 
     def test_help(self):
-        h = ("Documented commands (type help <topic>):\n"
+        k = ("Documented commands (type help <topic>):\n"
              "========================================\n"
              "EOF  all  count  create  destroy  help  quit  show  update")
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("help"))
-            self.assertEqual(h, output.getvalue().strip())
+            self.assertEqual(k, output.getvalue().strip())
 
 
 class Test_cmd_exit(unittest.TestCase):
@@ -142,63 +143,63 @@ class Test_cmd_create(unittest.TestCase):
             pass
 
     def test_create_missing_class(self):
-        correct = "** class name missing **"
+       k = "** class name missing **"
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("create"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(k, output.getvalue().strip())
 
     def test_create_invalid_class(self):
-        correct = "** class doesn't exist **"
+        k = "** class doesn't exist **"
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("create MyModel"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(k, output.getvalue().strip())
 
     def test_create_invalid_syntax(self):
-        correct = "*** Unknown syntax: MyModel.create()"
+        k = "*** Unknown syntax: MyModel.create()"
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("MyModel.create()"))
-            self.assertEqual(correct, output.getvalue().strip())
-        correct = "*** Unknown syntax: BaseModel.create()"
+            self.assertEqual(k, output.getvalue().strip())
+        k = "*** Unknown syntax: BaseModel.create()"
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("BaseModel.create()"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(k, output.getvalue().strip())
 
     def test_create_object(self):
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("create BaseModel"))
             self.assertLess(0, len(output.getvalue().strip()))
-            testKey = "BaseModel.{}".format(output.getvalue().strip())
-            self.assertIn(testKey, storage.all().keys())
+            tester = "BaseModel.{}".format(output.getvalue().strip())
+            self.assertIn(tester, storage.all().keys())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("create User"))
             self.assertLess(0, len(output.getvalue().strip()))
-            testKey = "User.{}".format(output.getvalue().strip())
-            self.assertIn(testKey, storage.all().keys())
+            tester = "User.{}".format(output.getvalue().strip())
+            self.assertIn(tester, storage.all().keys())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("create State"))
             self.assertLess(0, len(output.getvalue().strip()))
-            testKey = "State.{}".format(output.getvalue().strip())
-            self.assertIn(testKey, storage.all().keys())
+            tester = "State.{}".format(output.getvalue().strip())
+            self.assertIn(tester, storage.all().keys())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("create City"))
             self.assertLess(0, len(output.getvalue().strip()))
-            testKey = "City.{}".format(output.getvalue().strip())
-            self.assertIn(testKey, storage.all().keys())
+            tester = "City.{}".format(output.getvalue().strip())
+            self.assertIn(tester, storage.all().keys())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("create Amenity"))
             self.assertLess(0, len(output.getvalue().strip()))
-            testKey = "Amenity.{}".format(output.getvalue().strip())
-            self.assertIn(testKey, storage.all().keys())
+            tester = "Amenity.{}".format(output.getvalue().strip())
+            self.assertIn(tester, storage.all().keys())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("create Place"))
             self.assertLess(0, len(output.getvalue().strip()))
-            testKey = "Place.{}".format(output.getvalue().strip())
-            self.assertIn(testKey, storage.all().keys())
+            tester = "Place.{}".format(output.getvalue().strip())
+            self.assertIn(tester, storage.all().keys())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("create Review"))
             self.assertLess(0, len(output.getvalue().strip()))
-            testKey = "Review.{}".format(output.getvalue().strip())
-            self.assertIn(testKey, storage.all().keys())
+            tester = "Review.{}".format(output.getvalue().strip())
+            self.assertIn(tester, storage.all().keys())
 
 
 class Test_cmd_show(unittest.TestCase):
