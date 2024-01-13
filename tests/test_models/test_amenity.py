@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""This script efines unittests for models/amenity.py
+"""This script defines unittests for models/amenity.py
 
 Unittest classes:
     TestAmenity_instantiation
