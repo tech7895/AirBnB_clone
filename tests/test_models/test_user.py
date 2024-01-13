@@ -62,28 +62,28 @@ class TestUser_instantiation(unittest.TestCase):
         self.assertLess(us1.updated_at, us2.updated_at)
 
     def test_str_representation(self):
-        dt = datetime.today()
-        dt_repr = repr(dt)
+        cdt = datetime.today()
+        cdt_repr = repr(cdt)
         us = User()
         us.id = "123456"
-        us.created_at = us.updated_at = dt
+        us.created_at = us.updated_at = cdt
         usstr = us.__str__()
         self.assertIn("[User] (123456)", usstr)
         self.assertIn("'id': '123456'", usstr)
-        self.assertIn("'created_at': " + dt_repr, usstr)
-        self.assertIn("'updated_at': " + dt_repr, usstr)
+        self.assertIn("'created_at': " + cdt_repr, usstr)
+        self.assertIn("'updated_at': " + cdt_repr, usstr)
 
     def test_args_unused(self):
         us = User(None)
         self.assertNotIn(None, us.__dict__.values())
 
     def test_instantiation_with_kwargs(self):
-        dt = datetime.today()
-        dt_iso = dt.isoformat()
-        us = User(id="345", created_at=dt_iso, updated_at=dt_iso)
+        cdt = datetime.today()
+        cdt_iso = cdt.isoformat()
+        us = User(id="345", created_at=cdt_iso, updated_at=cdt_iso)
         self.assertEqual(us.id, "345")
-        self.assertEqual(us.created_at, dt)
-        self.assertEqual(us.updated_at, dt)
+        self.assertEqual(us.created_at, cdt)
+        self.assertEqual(us.updated_at, cdt)
 
     def test_instantiation_with_None_kwargs(self):
         with self.assertRaises(TypeError):
@@ -170,15 +170,15 @@ class TestUser_to_dict(unittest.TestCase):
         self.assertEqual(str, type(us_dict["updated_at"]))
 
     def test_to_dict_output(self):
-        dt = datetime.today()
+        current_cdt = datetime.today()
         us = User()
         us.id = "123456"
-        us.created_at = us.updated_at = dt
+        us.created_at = us.updated_at = cdt
         tdict = {
             'id': '123456',
             '__class__': 'User',
-            'created_at': dt.isoformat(),
-            'updated_at': dt.isoformat(),
+            'created_at': cdt.isoformat(),
+            'updated_at': cdt.isoformat(),
         }
         self.assertDictEqual(us.to_dict(), tdict)
 

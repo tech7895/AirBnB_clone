@@ -45,45 +45,45 @@ class TestCity_instantiation(unittest.TestCase):
         self.assertNotIn("name", cy.__dict__)
 
     def test_two_cities_unique_ids(self):
-        cy1 = City()
-        cy2 = City()
-        self.assertNotEqual(cy1.id, cy2.id)
+        cty1 = City()
+        cty2 = City()
+        self.assertNotEqual(cty1.id, cty2.id)
 
     def test_two_cities_different_created_at(self):
-        cy1 = City()
+        cty1 = City()
         sleep(0.05)
-        cy2 = City()
-        self.assertLess(cy1.created_at, cy2.created_at)
+        cty2 = City()
+        self.assertLess(cty1.created_at, cty2.created_at)
 
     def test_two_cities_different_updated_at(self):
-        cy1 = City()
+        cty1 = City()
         sleep(0.05)
-        cy2 = City()
-        self.assertLess(cy1.updated_at, cy2.updated_at)
+        cty2 = City()
+        self.assertLess(cty1.updated_at, cty2.updated_at)
 
     def test_str_representation(self):
-        dt = datetime.today()
-        dt_repr = repr(dt)
+        current_cdt = datetime.today()
+        cdt_repr = repr(cdt)
         cy = City()
         cy.id = "123456"
-        cy.created_at = cy.updated_at = dt
+        cy.created_at = cy.updated_at = cdt
         cystr = cy.__str__()
         self.assertIn("[City] (123456)", cystr)
         self.assertIn("'id': '123456'", cystr)
-        self.assertIn("'created_at': " + dt_repr, cystr)
-        self.assertIn("'updated_at': " + dt_repr, cystr)
+        self.assertIn("'created_at': " + cdt_repr, cystr)
+        self.assertIn("'updated_at': " + cdt_repr, cystr)
 
     def test_args_unused(self):
         cy = City(None)
         self.assertNotIn(None, cy.__dict__.values())
 
     def test_instantiation_with_kwargs(self):
-        dt = datetime.today()
-        dt_iso = dt.isoformat()
-        cy = City(id="345", created_at=dt_iso, updated_at=dt_iso)
+        current_cdt = datetime.today()
+        cdt_iso = cdt.isoformat()
+        cy = City(id="345", created_at=cdt_iso, updated_at=cdt_iso)
         self.assertEqual(cy.id, "345")
-        self.assertEqual(cy.created_at, dt)
-        self.assertEqual(cy.updated_at, dt)
+        self.assertEqual(cy.created_at, cdt)
+        self.assertEqual(cy.updated_at, cdt)
 
     def test_instantiation_with_None_kwargs(self):
         with self.assertRaises(TypeError):
@@ -170,15 +170,15 @@ class TestCity_to_dict(unittest.TestCase):
         self.assertEqual(str, type(cy_dict["updated_at"]))
 
     def test_to_dict_output(self):
-        dt = datetime.today()
+        current_cdt = datetime.today()
         cy = City()
         cy.id = "123456"
-        cy.created_at = cy.updated_at = dt
+        cy.created_at = cy.updated_at = cdt
         tdict = {
             'id': '123456',
             '__class__': 'City',
-            'created_at': dt.isoformat(),
-            'updated_at': dt.isoformat(),
+            'created_at': cdt.isoformat(),
+            'updated_at': cdt.isoformat(),
         }
         self.assertDictEqual(cy.to_dict(), tdict)
 

@@ -40,33 +40,33 @@ class TestAmenity_instantiation(unittest.TestCase):
         self.assertNotIn("name", am.__dict__)
 
     def test_two_amenities_unique_ids(self):
-        am1 = Amenity()
-        am2 = Amenity()
-        self.assertNotEqual(am1.id, am2.id)
+        amen1 = Amenity()
+        amen2 = Amenity()
+        self.assertNotEqual(amen1.id, amen2.id)
 
     def test_two_amenities_different_created_at(self):
-        am1 = Amenity()
+        amen1 = Amenity()
         sleep(0.05)
-        am2 = Amenity()
-        self.assertLess(am1.created_at, am2.created_at)
+        amen2 = Amenity()
+        self.assertLess(amen1.created_at, amen2.created_at)
 
     def test_two_amenities_different_updated_at(self):
-        am1 = Amenity()
+        amen1 = Amenity()
         sleep(0.05)
-        am2 = Amenity()
-        self.assertLess(am1.updated_at, am2.updated_at)
+        amen2 = Amenity()
+        self.assertLess(amen1.updated_at, amen2.updated_at)
 
     def test_str_representation(self):
-        dt = datetime.today()
-        dt_repr = repr(dt)
+        current_cdt = datetime.today()
+        cdt_repr = repr(cdt)
         am = Amenity()
         am.id = "123456"
-        am.created_at = am.updated_at = dt
+        am.created_at = am.updated_at = cdt
         amstr = am.__str__()
         self.assertIn("[Amenity] (123456)", amstr)
         self.assertIn("'id': '123456'", amstr)
-        self.assertIn("'created_at': " + dt_repr, amstr)
-        self.assertIn("'updated_at': " + dt_repr, amstr)
+        self.assertIn("'created_at': " + cdt_repr, amstr)
+        self.assertIn("'updated_at': " + cdt_repr, amstr)
 
     def test_args_unused(self):
         am = Amenity(None)
@@ -74,12 +74,12 @@ class TestAmenity_instantiation(unittest.TestCase):
 
     def test_instantiation_with_kwargs(self):
         """instantiation with kwargs test method"""
-        dt = datetime.today()
-        dt_iso = dt.isoformat()
-        am = Amenity(id="345", created_at=dt_iso, updated_at=dt_iso)
+        current_cdt = datetime.today()
+        cdt_iso = cdt.isoformat()
+        am = Amenity(id="345", created_at=cdt_iso, updated_at=cdt_iso)
         self.assertEqual(am.id, "345")
-        self.assertEqual(am.created_at, dt)
-        self.assertEqual(am.updated_at, dt)
+        self.assertEqual(am.created_at, cdt)
+        self.assertEqual(am.updated_at, cdt)
 
     def test_instantiation_with_None_kwargs(self):
         with self.assertRaises(TypeError):
@@ -166,15 +166,15 @@ class TestAmenity_to_dict(unittest.TestCase):
         self.assertEqual(str, type(am_dict["updated_at"]))
 
     def test_to_dict_output(self):
-        dt = datetime.today()
+        current_cdt = datetime.today()
         am = Amenity()
         am.id = "123456"
-        am.created_at = am.updated_at = dt
+        am.created_at = am.updated_at = cdt
         tdict = {
             'id': '123456',
             '__class__': 'Amenity',
-            'created_at': dt.isoformat(),
-            'updated_at': dt.isoformat(),
+            'created_at': cdt.isoformat(),
+            'updated_at': cdt.isoformat(),
         }
         self.assertDictEqual(am.to_dict(), tdict)
 

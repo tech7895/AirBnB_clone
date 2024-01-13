@@ -35,57 +35,57 @@ class TestBaseModel_instantiation(unittest.TestCase):
         self.assertEqual(datetime, type(BaseModel().updated_at))
 
     def test_two_models_unique_ids(self):
-        bm1 = BaseModel()
-        bm2 = BaseModel()
-        self.assertNotEqual(bm1.id, bm2.id)
+        base_m1 = BaseModel()
+        base_m2 = BaseModel()
+        self.assertNotEqual(base_m1.id, base_m2.id)
 
     def test_two_models_different_created_at(self):
-        bm1 = BaseModel()
+        base_m1 = BaseModel()
         sleep(0.05)
-        bm2 = BaseModel()
-        self.assertLess(bm1.created_at, bm2.created_at)
+        base_m2 = BaseModel()
+        self.assertLess(base_m1.created_at, base_m2.created_at)
 
     def test_two_models_different_updated_at(self):
-        bm1 = BaseModel()
+        base_m1 = BaseModel()
         sleep(0.05)
-        bm2 = BaseModel()
-        self.assertLess(bm1.updated_at, bm2.updated_at)
+        base_m2 = BaseModel()
+        self.assertLess(base_m1.updated_at, base_m2.updated_at)
 
     def test_str_representation(self):
-        dt = datetime.today()
-        dt_repr = repr(dt)
+        current_cdt = datetime.today()
+        cdt_repr = repr(cdt)
         bm = BaseModel()
         bm.id = "123456"
-        bm.created_at = bm.updated_at = dt
+        bm.created_at = bm.updated_at = cdt
         bmstr = bm.__str__()
         self.assertIn("[BaseModel] (123456)", bmstr)
         self.assertIn("'id': '123456'", bmstr)
-        self.assertIn("'created_at': " + dt_repr, bmstr)
-        self.assertIn("'updated_at': " + dt_repr, bmstr)
+        self.assertIn("'created_at': " + cdt_repr, bmstr)
+        self.assertIn("'updated_at': " + cdt_repr, bmstr)
 
     def test_args_unused(self):
         bm = BaseModel(None)
         self.assertNotIn(None, bm.__dict__.values())
 
     def test_instantiation_with_kwargs(self):
-        dt = datetime.today()
-        dt_iso = dt.isoformat()
-        bm = BaseModel(id="345", created_at=dt_iso, updated_at=dt_iso)
+        current_cdt = datetime.today()
+        cdt_iso = cdt.isoformat()
+        bm = BaseModel(id="345", created_at=cdt_iso, updated_at=cdt_iso)
         self.assertEqual(bm.id, "345")
-        self.assertEqual(bm.created_at, dt)
-        self.assertEqual(bm.updated_at, dt)
+        self.assertEqual(bm.created_at, cdt)
+        self.assertEqual(bm.updated_at, cdt)
 
     def test_instantiation_with_None_kwargs(self):
         with self.assertRaises(TypeError):
             BaseModel(id=None, created_at=None, updated_at=None)
 
     def test_instantiation_with_args_and_kwargs(self):
-        dt = datetime.today()
-        dt_iso = dt.isoformat()
-        bm = BaseModel("12", id="345", created_at=dt_iso, updated_at=dt_iso)
+        current_cdt = datetime.today()
+        cdt_iso = cdt.isoformat()
+        bm = BaseModel("12", id="345", created_at=cdt_iso, updated_at=cdt_iso)
         self.assertEqual(bm.id, "345")
-        self.assertEqual(bm.created_at, dt)
-        self.assertEqual(bm.updated_at, dt)
+        self.assertEqual(bm.created_at, cdt)
+        self.assertEqual(bm.updated_at, cdt)
 
 
 class TestBaseModel_save(unittest.TestCase):
@@ -169,15 +169,15 @@ class TestBaseModel_to_dict(unittest.TestCase):
         self.assertEqual(str, type(bm_dict["updated_at"]))
 
     def test_to_dict_output(self):
-        dt = datetime.today()
+        current_cdt = datetime.today()
         bm = BaseModel()
         bm.id = "123456"
-        bm.created_at = bm.updated_at = dt
+        bm.created_at = bm.updated_at = cdt
         tdict = {
             'id': '123456',
             '__class__': 'BaseModel',
-            'created_at': dt.isoformat(),
-            'updated_at': dt.isoformat()
+            'created_at': cdt.isoformat(),
+            'updated_at': cdt.isoformat()
         }
         self.assertDictEqual(bm.to_dict(), tdict)
 

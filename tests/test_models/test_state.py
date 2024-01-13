@@ -40,45 +40,45 @@ class TestState_instantiation(unittest.TestCase):
         self.assertNotIn("name", st.__dict__)
 
     def test_two_states_unique_ids(self):
-        st1 = State()
-        st2 = State()
-        self.assertNotEqual(st1.id, st2.id)
+        state_1 = State()
+        state_2 = State()
+        self.assertNotEqual(state_1.id, state_2.id)
 
     def test_two_states_different_created_at(self):
-        st1 = State()
+        state_1 = State()
         sleep(0.05)
-        st2 = State()
-        self.assertLess(st1.created_at, st2.created_at)
+        state_2 = State()
+        self.assertLess(state_1.created_at, state_2.created_at)
 
     def test_two_states_different_updated_at(self):
-        st1 = State()
+        state_1 = State()
         sleep(0.05)
-        st2 = State()
-        self.assertLess(st1.updated_at, st2.updated_at)
+        state_2 = State()
+        self.assertLess(state_1.updated_at, state_2.updated_at)
 
     def test_str_representation(self):
-        dt = datetime.today()
-        dt_repr = repr(dt)
+        current_cdt = datetime.today()
+        cdt_repr = repr(cdt)
         st = State()
         st.id = "123456"
-        st.created_at = st.updated_at = dt
+        st.created_at = st.updated_at = cdt
         ststr = st.__str__()
         self.assertIn("[State] (123456)", ststr)
         self.assertIn("'id': '123456'", ststr)
-        self.assertIn("'created_at': " + dt_repr, ststr)
-        self.assertIn("'updated_at': " + dt_repr, ststr)
+        self.assertIn("'created_at': " + cdt_repr, ststr)
+        self.assertIn("'updated_at': " + cdt_repr, ststr)
 
     def test_args_unused(self):
         st = State(None)
         self.assertNotIn(None, st.__dict__.values())
 
     def test_instantiation_with_kwargs(self):
-        dt = datetime.today()
-        dt_iso = dt.isoformat()
-        st = State(id="345", created_at=dt_iso, updated_at=dt_iso)
+        current_cdt = datetime.today()
+        cdt_iso = cdt.isoformat()
+        st = State(id="345", created_at=cdt_iso, updated_at=cdt_iso)
         self.assertEqual(st.id, "345")
-        self.assertEqual(st.created_at, dt)
-        self.assertEqual(st.updated_at, dt)
+        self.assertEqual(st.created_at, cdt)
+        self.assertEqual(st.updated_at, cdt)
 
     def test_instantiation_with_None_kwargs(self):
         with self.assertRaises(TypeError):
@@ -165,15 +165,15 @@ class TestState_to_dict(unittest.TestCase):
         self.assertEqual(str, type(st_dict["updated_at"]))
 
     def test_to_dict_output(self):
-        dt = datetime.today()
+        current_cdt = datetime.today()
         st = State()
         st.id = "123456"
-        st.created_at = st.updated_at = dt
+        st.created_at = st.updated_at = cdt
         tdict = {
             'id': '123456',
             '__class__': 'State',
-            'created_at': dt.isoformat(),
-            'updated_at': dt.isoformat(),
+            'created_at': cdt.isoformat(),
+            'updated_at': cdt.isoformat(),
         }
         self.assertDictEqual(st.to_dict(), tdict)
 
