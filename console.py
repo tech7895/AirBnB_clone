@@ -58,11 +58,11 @@ class my_command(cmd.Cmd):
         """A default behavior for cmd module when input
         is invalid"""
         argdict = {
-            "all": self.do_all,
-            "show": self.do_show,
-            "destroy": self.do_destroy,
-            "count": self.do_count,
-            "update": self.do_update
+            "all": self.make_all,
+            "show": self.make_show,
+            "destroy": self.make_destroy,
+            "count": self.make_count,
+            "update": self.make_update
         }
         match = re.search(r"\.", arg)
         if match is not None:
@@ -76,16 +76,16 @@ class my_command(cmd.Cmd):
         print("*** Unknown syntax: {}".format(arg))
         return False
 
-    def do_quit(self, arg):
+    def make_quit(self, arg):
         """This quits command to exit the program."""
         return True
 
-    def do_EOF(self, arg):
+    def make_EOF(self, arg):
         """The EOF signal to exit the program."""
         print("")
         return True
 
-    def do_create(self, arg):
+    def make_create(self, arg):
         """Usage: create <class>
         Creates a new class instance and print its id.
         """
@@ -98,7 +98,7 @@ class my_command(cmd.Cmd):
             print(eval(args_lst[0])().id)
             storage.save()
 
-    def do_show(self, arg):
+    def make_show(self, arg):
         """Usage: show <class> <id> or <class>.show(<id>)
         Displays the string representation of a class instance of
         a given id.
@@ -116,7 +116,7 @@ class my_command(cmd.Cmd):
         else:
             print(obj_dict["{}.{}".format(args_lst[0], args_lst[1])])
 
-    def do_destroy(self, arg):
+    def make_destroy(self, arg):
         """Usage: destroy <class> <id> or <class>.destroy(<id>)
         Deletes a class instance of a given id."""
         args_lst = parse(arg)
@@ -133,7 +133,7 @@ class my_command(cmd.Cmd):
             del obj_dict["{}.{}".format(args_lst[0], args_lst[1])]
             storage.save()
 
-    def do_all(self, arg):
+    def make_all(self, arg):
         """Usage: all or all <class> or <class>.all()
         Displays a string representations of all instances of a given class.
         If no class is specified, displays all instantiated objects."""
@@ -141,15 +141,15 @@ class my_command(cmd.Cmd):
         if len(args_lst) > 0 and args_lst[0] not in my_command.__classes:
             print("** class doesn't exist **")
         else:
-            objl = []
+            result_lst = []
             for obj in storage.all().values():
                 if len(args_lst) > 0 and args_lst[0] == obj.__class__.__name__:
-                    objl.append(obj.__str__())
+                    result_lst.append(obj.__str__())
                 elif len(args_lst) == 0:
-                    objl.append(obj.__str__())
-            print(objl)
+                    result_lst.append(obj.__str__())
+            print(result_lst)
 
-    def do_count(self, arg):
+    def make_count(self, arg):
         """Usage: count <class> or <class>.count()
         Retrieves the number of instances of a given class."""
         args_lst = parse(arg)
@@ -159,7 +159,7 @@ class my_command(cmd.Cmd):
                 count += 1
         print(count)
 
-    def do_update(self, arg):
+    def make_update(self, arg):
         """Usage: update <class> <id> <attribute_name> <attribute_value> or
        <class>.update(<id>, <attribute_name>, <attribute_value>) or
        <class>.update(<id>, <dictionary>)
