@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """The script defines the HBnB console"""
-import cmd
 import re
+import cmd
 from shlex import split
 from models import storage
 from models.base_model import BaseModel
@@ -31,8 +31,8 @@ def parse(arg):
         return result_lst
 
 
-class HBNBCommand(cmd.Cmd):
-    """The script defines the HolbertonBnB command
+class my_command(cmd.Cmd):
+    """The script defines the HBnB command
     interpreter.
 
     Attributes:
@@ -92,7 +92,7 @@ class HBNBCommand(cmd.Cmd):
         args_lst = parse(arg)
         if len(args_lst) == 0:
             print("** class name missing **")
-        elif args_lst[0] not in HBNBCommand.__classes:
+        elif args_lst[0] not in my_command.__classes:
             print("** class doesn't exist **")
         else:
             print(eval(args_lst[0])().id)
@@ -107,7 +107,7 @@ class HBNBCommand(cmd.Cmd):
         obj_dict = storage.all()
         if len(args_lst) == 0:
             print("** class name missing **")
-        elif args_lst[0] not in HBNBCommand.__classes:
+        elif args_lst[0] not in my_command.__classes:
             print("** class doesn't exist **")
         elif len(args_lst) == 1:
             print("** instance id missing **")
@@ -123,7 +123,7 @@ class HBNBCommand(cmd.Cmd):
         obj_dict = storage.all()
         if len(args_lst) == 0:
             print("** class name missing **")
-        elif args_lst[0] not in HBNBCommand.__classes:
+        elif args_lst[0] not in my_command.__classes:
             print("** class doesn't exist **")
         elif len(args_lst) == 1:
             print("** instance id missing **")
@@ -138,7 +138,7 @@ class HBNBCommand(cmd.Cmd):
         Displays a string representations of all instances of a given class.
         If no class is specified, displays all instantiated objects."""
         args_lst = parse(arg)
-        if len(args_lst) > 0 and args_lst[0] not in HBNBCommand.__classes:
+        if len(args_lst) > 0 and args_lst[0] not in my_command.__classes:
             print("** class doesn't exist **")
         else:
             objl = []
@@ -171,7 +171,7 @@ class HBNBCommand(cmd.Cmd):
         if len(args_lst) == 0:
             print("** class name missing **")
             return False
-        if args_lst[0] not in HBNBCommand.__classes:
+        if args_lst[0] not in my_command.__classes:
             print("** class doesn't exist **")
             return False
         if len(args_lst) == 1:
@@ -210,4 +210,4 @@ class HBNBCommand(cmd.Cmd):
 
 
 if __name__ == "__main__":
-    HBNBCommand().cmdloop()
+    my_command().cmdloop()
