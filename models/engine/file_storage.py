@@ -26,13 +26,13 @@ class FileStorage:
 
     def new(self, obj):
         """Sets in __objects obj with key <obj_class_name>.id"""
-        ocname = obj.__class__.__name__
-        FileStorage.__objects["{}.{}".format(ocname, obj.id)] = obj
+        obj_c_nm = obj.__class__.__name__
+        FileStorage.__objects["{}.{}".format(obj_c_nm, obj.id)] = obj
 
     def save(self):
         """Serializes __objects to the JSON file __file_path."""
-        odict = FileStorage.__objects
-        obj_dict = {obj: odict[obj].to_dict() for obj in odict.keys()}
+        ob_dct = FileStorage.__objects
+        obj_dict = {obj: ob_dct[obj].to_dict() for obj in ob_dct.keys()}
         with open(FileStorage.__file_path, "w") as f:
             json.dump(obj_dict, f)
 
