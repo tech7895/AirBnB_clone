@@ -60,7 +60,7 @@ class my_command(cmd.Cmd):
         argdict = {
             "all": self.do_all,
             "show": self.do_show,
-            "destroy": self.do_destroy,
+            "destroy": self.make_destroy,
             "count": self.do_count,
             "update": self.do_update
         }
@@ -116,7 +116,7 @@ class my_command(cmd.Cmd):
         else:
             print(obj_dict["{}.{}".format(args_lst[0], args_lst[1])])
 
-    def do_destroy(self, arg):
+    def make_destroy(self, arg):
         """Usage: destroy <class> <id> or <class>.destroy(<id>)
         Deletes a class instance of a given id."""
         args_lst = parse(arg)
