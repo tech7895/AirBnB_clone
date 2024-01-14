@@ -62,7 +62,7 @@ class TestCity_instantiation(unittest.TestCase):
         self.assertLess(cty1.updated_at, cty2.updated_at)
 
     def test_str_representation(self):
-        current_cdt = datetime.today()
+        cdt = datetime.today()
         cdt_repr = repr(cdt)
         cy = City()
         cy.id = "123456"
@@ -78,7 +78,7 @@ class TestCity_instantiation(unittest.TestCase):
         self.assertNotIn(None, cy.__dict__.values())
 
     def test_instantiation_with_kwargs(self):
-        current_cdt = datetime.today()
+        cdt = datetime.today()
         cdt_iso = cdt.isoformat()
         cy = City(id="345", created_at=cdt_iso, updated_at=cdt_iso)
         self.assertEqual(cy.id, "345")
@@ -170,7 +170,7 @@ class TestCity_to_dict(unittest.TestCase):
         self.assertEqual(str, type(cy_dict["updated_at"]))
 
     def test_to_dict_output(self):
-        current_cdt = datetime.today()
+        cdt = datetime.today()
         cy = City()
         cy.id = "123456"
         cy.created_at = cy.updated_at = cdt

@@ -57,7 +57,7 @@ class TestState_instantiation(unittest.TestCase):
         self.assertLess(state_1.updated_at, state_2.updated_at)
 
     def test_str_representation(self):
-        current_cdt = datetime.today()
+        cdt = datetime.today()
         cdt_repr = repr(cdt)
         st = State()
         st.id = "123456"
@@ -73,7 +73,7 @@ class TestState_instantiation(unittest.TestCase):
         self.assertNotIn(None, st.__dict__.values())
 
     def test_instantiation_with_kwargs(self):
-        current_cdt = datetime.today()
+        cdt = datetime.today()
         cdt_iso = cdt.isoformat()
         st = State(id="345", created_at=cdt_iso, updated_at=cdt_iso)
         self.assertEqual(st.id, "345")
@@ -165,7 +165,7 @@ class TestState_to_dict(unittest.TestCase):
         self.assertEqual(str, type(st_dict["updated_at"]))
 
     def test_to_dict_output(self):
-        current_cdt = datetime.today()
+        cdt = datetime.today()
         st = State()
         st.id = "123456"
         st.created_at = st.updated_at = cdt

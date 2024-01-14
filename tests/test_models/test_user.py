@@ -170,7 +170,7 @@ class TestUser_to_dict(unittest.TestCase):
         self.assertEqual(str, type(us_dict["updated_at"]))
 
     def test_to_dict_output(self):
-        current_cdt = datetime.today()
+        cdt = datetime.today()
         us = User()
         us.id = "123456"
         us.created_at = us.updated_at = cdt

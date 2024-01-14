@@ -57,7 +57,7 @@ class TestAmenity_instantiation(unittest.TestCase):
         self.assertLess(amen1.updated_at, amen2.updated_at)
 
     def test_str_representation(self):
-        current_cdt = datetime.today()
+        cdt = datetime.today()
         cdt_repr = repr(cdt)
         am = Amenity()
         am.id = "123456"
@@ -74,7 +74,7 @@ class TestAmenity_instantiation(unittest.TestCase):
 
     def test_instantiation_with_kwargs(self):
         """instantiation with kwargs test method"""
-        current_cdt = datetime.today()
+        cdt = datetime.today()
         cdt_iso = cdt.isoformat()
         am = Amenity(id="345", created_at=cdt_iso, updated_at=cdt_iso)
         self.assertEqual(am.id, "345")
@@ -166,7 +166,7 @@ class TestAmenity_to_dict(unittest.TestCase):
         self.assertEqual(str, type(am_dict["updated_at"]))
 
     def test_to_dict_output(self):
-        current_cdt = datetime.today()
+        cdt = datetime.today()
         am = Amenity()
         am.id = "123456"
         am.created_at = am.updated_at = cdt

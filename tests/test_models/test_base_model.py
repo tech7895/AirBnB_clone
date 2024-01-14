@@ -52,7 +52,7 @@ class TestBaseModel_instantiation(unittest.TestCase):
         self.assertLess(base_m1.updated_at, base_m2.updated_at)
 
     def test_str_representation(self):
-        current_cdt = datetime.today()
+        cdt = datetime.today()
         cdt_repr = repr(cdt)
         bm = BaseModel()
         bm.id = "123456"
@@ -68,7 +68,7 @@ class TestBaseModel_instantiation(unittest.TestCase):
         self.assertNotIn(None, bm.__dict__.values())
 
     def test_instantiation_with_kwargs(self):
-        current_cdt = datetime.today()
+        cdt = datetime.today()
         cdt_iso = cdt.isoformat()
         bm = BaseModel(id="345", created_at=cdt_iso, updated_at=cdt_iso)
         self.assertEqual(bm.id, "345")
@@ -80,7 +80,7 @@ class TestBaseModel_instantiation(unittest.TestCase):
             BaseModel(id=None, created_at=None, updated_at=None)
 
     def test_instantiation_with_args_and_kwargs(self):
-        current_cdt = datetime.today()
+        cdt = datetime.today()
         cdt_iso = cdt.isoformat()
         bm = BaseModel("12", id="345", created_at=cdt_iso, updated_at=cdt_iso)
         self.assertEqual(bm.id, "345")
@@ -169,7 +169,7 @@ class TestBaseModel_to_dict(unittest.TestCase):
         self.assertEqual(str, type(bm_dict["updated_at"]))
 
     def test_to_dict_output(self):
-        current_cdt = datetime.today()
+        cdt = datetime.today()
         bm = BaseModel()
         bm.id = "123456"
         bm.created_at = bm.updated_at = cdt
