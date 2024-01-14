@@ -31,12 +31,12 @@ def parse(arg):
         return result_lst
 
 
-class my_command(cmd.Cmd):
-    """The script defines the HBnB command
+class my_cnd(cmd.Cmd):
+    """The script defines the HBnB cnd
     interpreter.
 
     Attributes:
-        prompt (str): the command prompt
+        prompt (str): the cnd prompt
     """
 
     prompt = "(hbnb) "
@@ -64,20 +64,20 @@ class my_command(cmd.Cmd):
             "count": self.do_count,
             "update": self.do_update
         }
-        re_match = re.search(r"\.", arg)
-        if re_match is not None:
-            args_lst = [arg[:re_match.span()[0]], arg[re_match.span()[1]:]]
-            re_match = re.search(r"\((.*?)\)", args_lst[1])
-            if re_match is not None:
-                command = [args_lst[1][:re_match.span()[0]], re_match.group()[1:-1]]
-                if command[0] in argdict.keys():
-                    call = "{} {}".format(args_lst[0], command[1])
-                    return argdict[command[0]](call)
+        re_mach = re.search(r"\.", arg)
+        if re_mach is not None:
+            args_lst = [arg[:re_mach.span()[0]], arg[re_mach.span()[1]:]]
+            re_mach = re.search(r"\((.*?)\)", args_lst[1])
+            if re_mach is not None:
+                cnd = [args_lst[1][:re_mach.span()[0]], re_mach.group()[1:-1]]
+                if cnd[0] in argdict.keys():
+                    call = "{} {}".format(args_lst[0], cnd[1])
+                    return argdict[cnd[0]](call)
         print("*** Unknown syntax: {}".format(arg))
         return False
 
     def do_quit(self, arg):
-        """This quits command to exit the program."""
+        """This quits cnd to exit the program."""
         return True
 
     def do_EOF(self, arg):
@@ -92,7 +92,7 @@ class my_command(cmd.Cmd):
         args_lst = parse(arg)
         if len(args_lst) == 0:
             print("** class name missing **")
-        elif args_lst[0] not in my_command.__classes:
+        elif args_lst[0] not in my_cnd.__classes:
             print("** class doesn't exist **")
         else:
             print(eval(args_lst[0])().id)
@@ -107,7 +107,7 @@ class my_command(cmd.Cmd):
         obj_dict = storage.all()
         if len(args_lst) == 0:
             print("** class name missing **")
-        elif args_lst[0] not in my_command.__classes:
+        elif args_lst[0] not in my_cnd.__classes:
             print("** class doesn't exist **")
         elif len(args_lst) == 1:
             print("** instance id missing **")
@@ -123,7 +123,7 @@ class my_command(cmd.Cmd):
         obj_dict = storage.all()
         if len(args_lst) == 0:
             print("** class name missing **")
-        elif args_lst[0] not in my_command.__classes:
+        elif args_lst[0] not in my_cnd.__classes:
             print("** class doesn't exist **")
         elif len(args_lst) == 1:
             print("** instance id missing **")
@@ -138,7 +138,7 @@ class my_command(cmd.Cmd):
         Displays a string representations of all instances of a given class.
         If no class is specified, displays all instantiated objects."""
         args_lst = parse(arg)
-        if len(args_lst) > 0 and args_lst[0] not in my_command.__classes:
+        if len(args_lst) > 0 and args_lst[0] not in my_cnd.__classes:
             print("** class doesn't exist **")
         else:
             result_lst = []
@@ -171,7 +171,7 @@ class my_command(cmd.Cmd):
         if len(args_lst) == 0:
             print("** class name missing **")
             return False
-        if args_lst[0] not in my_command.__classes:
+        if args_lst[0] not in my_cnd.__classes:
             print("** class doesn't exist **")
             return False
         if len(args_lst) == 1:
@@ -210,4 +210,4 @@ class my_command(cmd.Cmd):
 
 
 if __name__ == "__main__":
-    my_command().cmdloop()
+    my_cnd().cmdloop()
