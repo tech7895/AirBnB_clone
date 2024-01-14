@@ -226,118 +226,118 @@ class Test_cmd_show(unittest.TestCase):
             pass
 
     def test_show_missing_class(self):
-        correct = "** class name missing **"
+        corr = "** class name missing **"
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("show"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd(".show()"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
 
     def test_show_invalid_class(self):
-        correct = "** class doesn't exist **"
+        corr = "** class doesn't exist **"
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("show MyModel"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("MyModel.show()"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
 
     def test_show_missing_id_space_notation(self):
-        correct = "** instance id missing **"
+        corr = "** instance id missing **"
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("show BaseModel"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("show User"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("show State"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("show City"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("show Amenity"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("show Place"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("show Review"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
 
     def test_show_missing_id_dot_notation(self):
-        correct = "** instance id missing **"
+        corr = "** instance id missing **"
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("BaseModel.show()"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("User.show()"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("State.show()"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("City.show()"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("Amenity.show()"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("Place.show()"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("Review.show()"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
 
     def test_show_no_instance_found_space_notation(self):
-        correct = "** no instance found **"
+        corr = "** no instance found **"
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("show BaseModel 1"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("show User 1"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("show State 1"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("show City 1"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("show Amenity 1"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("show Place 1"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("show Review 1"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
 
     def test_show_no_instance_found_dot_notation(self):
-        correct = "** no instance found **"
+        corr = "** no instance found **"
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("BaseModel.show(1)"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("User.show(1)"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("State.show(1)"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("City.show(1)"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("Amenity.show(1)"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("Place.show(1)"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("Review.show(1)"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
 
     def test_show_objects_space_notation(self):
         with patch("sys.stdout", new=StringIO()) as output:
@@ -481,118 +481,118 @@ class Test_cmd_destroy(unittest.TestCase):
         storage.reload()
 
     def test_destroy_missing_class(self):
-        correct = "** class name missing **"
+        corr = "** class name missing **"
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("destroy"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd(".destroy()"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
 
     def test_destroy_invalid_class(self):
-        correct = "** class doesn't exist **"
+        corr = "** class doesn't exist **"
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("destroy MyModel"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("MyModel.destroy()"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
 
     def test_destroy_id_missing_space_notation(self):
-        correct = "** instance id missing **"
+        corr = "** instance id missing **"
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("destroy BaseModel"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("destroy User"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("destroy State"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("destroy City"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("destroy Amenity"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("destroy Place"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("destroy Review"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
 
     def test_destroy_id_missing_dot_notation(self):
-        correct = "** instance id missing **"
+        corr = "** instance id missing **"
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("BaseModel.destroy()"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("User.destroy()"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("State.destroy()"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("City.destroy()"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("Amenity.destroy()"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("Place.destroy()"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("Review.destroy()"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
 
     def test_destroy_invalid_id_space_notation(self):
-        correct = "** no instance found **"
+        corr = "** no instance found **"
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("destroy BaseModel 1"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("destroy User 1"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("destroy State 1"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("destroy City 1"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("destroy Amenity 1"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("destroy Place 1"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("destroy Review 1"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
 
     def test_destroy_invalid_id_dot_notation(self):
-        correct = "** no instance found **"
+        corr = "** no instance found **"
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("BaseModel.destroy(1)"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("User.destroy(1)"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("State.destroy(1)"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("City.destroy(1)"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("Amenity.destroy(1)"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("Place.destroy(1)"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("Review.destroy(1)"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
 
     def test_destroy_objects_space_notation(self):
         with patch("sys.stdout", new=StringIO()) as output:
@@ -735,13 +735,13 @@ class Test_cmd_all(unittest.TestCase):
             pass
 
     def test_all_invalid_class(self):
-        correct = "** class doesn't exist **"
+        corr = "** class doesn't exist **"
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("all MyModel"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("MyModel.all()"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
 
     def test_all_objects_space_notation(self):
         with patch("sys.stdout", new=StringIO()) as output:
@@ -881,312 +881,312 @@ class Test_cmd_update(unittest.TestCase):
             pass
 
     def test_update_missing_class(self):
-        correct = "** class name missing **"
+        corr = "** class name missing **"
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("update"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd(".update()"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
 
     def test_update_invalid_class(self):
-        correct = "** class doesn't exist **"
+        corr = "** class doesn't exist **"
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("update MyModel"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("MyModel.update()"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
 
     def test_update_missing_id_space_notation(self):
-        correct = "** instance id missing **"
+        corr = "** instance id missing **"
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("update BaseModel"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("update User"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("update State"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("update City"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("update Amenity"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("update Place"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("update Review"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
 
     def test_update_missing_id_dot_notation(self):
-        correct = "** instance id missing **"
+        corr = "** instance id missing **"
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("BaseModel.update()"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("User.update()"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("State.update()"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("City.update()"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("Amenity.update()"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("Place.update()"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("Review.update()"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
 
     def test_update_invalid_id_space_notation(self):
-        correct = "** no instance found **"
+        corr = "** no instance found **"
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("update BaseModel 1"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("update User 1"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("update State 1"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("update City 1"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("update Amenity 1"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("update Place 1"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("update Review 1"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
 
     def test_update_invalid_id_dot_notation(self):
-        correct = "** no instance found **"
+        corr = "** no instance found **"
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("BaseModel.update(1)"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("User.update(1)"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("State.update(1)"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("City.update(1)"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("Amenity.update(1)"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("Place.update(1)"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("Review.update(1)"))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
 
     def test_update_missing_attr_name_space_notation(self):
-        correct = "** attribute name missing **"
+        corr = "** attribute name missing **"
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("create BaseModel"))
             testId = output.getvalue().strip()
             testCmd = "update BaseModel {}".format(testId)
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd(testCmd))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("create User"))
             testId = output.getvalue().strip()
             testCmd = "update User {}".format(testId)
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd(testCmd))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("create State"))
             testId = output.getvalue().strip()
             testCmd = "update State {}".format(testId)
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd(testCmd))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("create City"))
             testId = output.getvalue().strip()
             testCmd = "update City {}".format(testId)
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd(testCmd))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("create Amenity"))
             testId = output.getvalue().strip()
             testCmd = "update Amenity {}".format(testId)
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd(testCmd))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("create Place"))
             testId = output.getvalue().strip()
             testCmd = "update Place {}".format(testId)
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd(testCmd))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
 
     def test_update_missing_attr_name_dot_notation(self):
-        correct = "** attribute name missing **"
+        corr = "** attribute name missing **"
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("create BaseModel"))
             testId = output.getvalue().strip()
             testCmd = "BaseModel.update({})".format(testId)
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd(testCmd))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("create User"))
             testId = output.getvalue().strip()
             testCmd = "User.update({})".format(testId)
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd(testCmd))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("create State"))
             testId = output.getvalue().strip()
             testCmd = "State.update({})".format(testId)
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd(testCmd))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("create City"))
             testId = output.getvalue().strip()
             testCmd = "City.update({})".format(testId)
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd(testCmd))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("create Amenity"))
             testId = output.getvalue().strip()
             testCmd = "Amenity.update({})".format(testId)
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd(testCmd))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd("create Place"))
             testId = output.getvalue().strip()
             testCmd = "Place.update({})".format(testId)
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(my_command().onecmd(testCmd))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
 
     def test_update_missing_attr_value_space_notation(self):
-        correct = "** value missing **"
+        corr = "** value missing **"
         with patch("sys.stdout", new=StringIO()) as output:
             my_command().onecmd("create BaseModel")
             testId = output.getvalue().strip()
         with patch("sys.stdout", new=StringIO()) as output:
             testCmd = "update BaseModel {} attr_name".format(testId)
             self.assertFalse(my_command().onecmd(testCmd))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             my_command().onecmd("create User")
             testId = output.getvalue().strip()
         with patch("sys.stdout", new=StringIO()) as output:
             testCmd = "update User {} attr_name".format(testId)
             self.assertFalse(my_command().onecmd(testCmd))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             my_command().onecmd("create State")
             testId = output.getvalue().strip()
         with patch("sys.stdout", new=StringIO()) as output:
             testCmd = "update State {} attr_name".format(testId)
             self.assertFalse(my_command().onecmd(testCmd))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             my_command().onecmd("create City")
             testId = output.getvalue().strip()
         with patch("sys.stdout", new=StringIO()) as output:
             testCmd = "update City {} attr_name".format(testId)
             self.assertFalse(my_command().onecmd(testCmd))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             my_command().onecmd("create Amenity")
             testId = output.getvalue().strip()
         with patch("sys.stdout", new=StringIO()) as output:
             testCmd = "update Amenity {} attr_name".format(testId)
             self.assertFalse(my_command().onecmd(testCmd))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             my_command().onecmd("create Place")
             testId = output.getvalue().strip()
         with patch("sys.stdout", new=StringIO()) as output:
             testCmd = "update Place {} attr_name".format(testId)
             self.assertFalse(my_command().onecmd(testCmd))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             my_command().onecmd("create Review")
             testId = output.getvalue().strip()
         with patch("sys.stdout", new=StringIO()) as output:
             testCmd = "update Review {} attr_name".format(testId)
             self.assertFalse(my_command().onecmd(testCmd))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
 
     def test_update_missing_attr_value_dot_notation(self):
-        correct = "** value missing **"
+        corr = "** value missing **"
         with patch("sys.stdout", new=StringIO()) as output:
             my_command().onecmd("create BaseModel")
             testId = output.getvalue().strip()
         with patch("sys.stdout", new=StringIO()) as output:
             testCmd = "BaseModel.update({}, attr_name)".format(testId)
             self.assertFalse(my_command().onecmd(testCmd))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             my_command().onecmd("create User")
             testId = output.getvalue().strip()
         with patch("sys.stdout", new=StringIO()) as output:
             testCmd = "User.update({}, attr_name)".format(testId)
             self.assertFalse(my_command().onecmd(testCmd))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             my_command().onecmd("create State")
             testId = output.getvalue().strip()
         with patch("sys.stdout", new=StringIO()) as output:
             testCmd = "State.update({}, attr_name)".format(testId)
             self.assertFalse(my_command().onecmd(testCmd))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             my_command().onecmd("create City")
             testId = output.getvalue().strip()
         with patch("sys.stdout", new=StringIO()) as output:
             testCmd = "City.update({}, attr_name)".format(testId)
             self.assertFalse(my_command().onecmd(testCmd))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             my_command().onecmd("create Amenity")
             testId = output.getvalue().strip()
         with patch("sys.stdout", new=StringIO()) as output:
             testCmd = "Amenity.update({}, attr_name)".format(testId)
             self.assertFalse(my_command().onecmd(testCmd))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             my_command().onecmd("create Place")
             testId = output.getvalue().strip()
         with patch("sys.stdout", new=StringIO()) as output:
             testCmd = "Place.update({}, attr_name)".format(testId)
             self.assertFalse(my_command().onecmd(testCmd))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
         with patch("sys.stdout", new=StringIO()) as output:
             my_command().onecmd("create Review")
             testId = output.getvalue().strip()
         with patch("sys.stdout", new=StringIO()) as output:
             testCmd = "Review.update({}, attr_name)".format(testId)
             self.assertFalse(my_command().onecmd(testCmd))
-            self.assertEqual(correct, output.getvalue().strip())
+            self.assertEqual(corr, output.getvalue().strip())
 
     def test_update_valid_string_attr_space_notation(self):
         with patch("sys.stdout", new=StringIO()) as output:
