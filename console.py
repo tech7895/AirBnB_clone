@@ -2,29 +2,31 @@
 """The script defines the HBnB console"""
 import re
 import cmd
-import models
-import shlex
-import models.base_model
-import models.user
-import models.state
-import models.city
-import models.place
-import models.amenity
-import models.review
+
+from models import storage
+from models.base_model import BaseModel
+from models.user import User
+from models.state import State
+from models.city import City
+from models.place import Place
+from models.amenity import Amenity
+from models.review import Review
+from shlex import split
+
 
 def parse(arg):
     curly_bracesMatch = re.search(r"\{(.*?)\}", arg)
     brackets = re.search(r"\[(.*?)\]", arg)
     if curly_bracesMatch is None:
         if brackets is None:
-            return [i.strip(",") for i in shlex.split(arg)]
+            return [i.strip(",") for i in split(arg)]
         else:
-            lexer = shlex.split(arg[:brackets.span()[0]])
+            lexer = split(arg[:brackets.span()[0]])
             result_lst = [i.strip(",") for i in lexer]
             result_lst.append(brackets.group())
             return result_lst
     else:
-        lexer = shlex.split(arg[:curly_bracesMatch.span()[0]])
+        lexer = split(arg[:curly_bracesMatch.span()[0]])
         result_lst = [i.strip(",") for i in lexer]
         result_lst.append(curly_bracesMatch.group())
         return result_lst
@@ -95,7 +97,7 @@ class my_command(cmd.Cmd):
             print("** class doesn't exist **")
         else:
             print(eval(args_lst[0])().id)
-            models.storage.save()
+            storage.save()
 
     def do_show(self, arg):
         """Usage: show <class> <id> or <class>.show(<id>)
@@ -103,7 +105,7 @@ class my_command(cmd.Cmd):
         a given id.
         """
         args_lst = parse(arg)
-        obj_dict = models.storage.all()
+        obj_dict = storage.all()
         if len(args_lst) == 0:
             print("** class name missing **")
         elif args_lst[0] not in my_command.__classes:
@@ -119,7 +121,7 @@ class my_command(cmd.Cmd):
         """Usage: destroy <class> <id> or <class>.destroy(<id>)
         Deletes a class instance of a given id."""
         args_lst = parse(arg)
-        obj_dict = models.storage.all()
+        obj_dict = storage.all()
         if len(args_lst) == 0:
             print("** class name missing **")
         elif args_lst[0] not in my_command.__classes:
@@ -130,7 +132,7 @@ class my_command(cmd.Cmd):
             print("** no instance found **")
         else:
             del obj_dict["{}.{}".format(args_lst[0], args_lst[1])]
-            models.storage.save()
+            storage.save()
 
     def do_all(self, arg):
         """Usage: all or all <class> or <class>.all()
@@ -141,7 +143,7 @@ class my_command(cmd.Cmd):
             print("** class doesn't exist **")
         else:
             result_lst = []
-            for obj in models.storage.all().values():
+            for obj in storage.all().values():
                 if len(args_lst) > 0 and args_lst[0] == obj.__class__.__name__:
                     result_lst.append(obj.__str__())
                 elif len(args_lst) == 0:
@@ -153,7 +155,7 @@ class my_command(cmd.Cmd):
         Retrieves the number of instances of a given class."""
         args_lst = parse(arg)
         count = 0
-        for obj in models.storage.all().values():
+        for obj in storage.all().values():
             if args_lst[0] == obj.__class__.__name__:
                 count += 1
         print(count)
@@ -165,7 +167,7 @@ class my_command(cmd.Cmd):
         Updates a class instance of a given id by adding or updating
         a given attribute key/value pair or dictionary."""
         args_lst = parse(arg)
-        obj_dict = models.storage.all()
+        obj_dict = storage.all()
 
         if len(args_lst) == 0:
             print("** class name missing **")
@@ -205,7 +207,7 @@ class my_command(cmd.Cmd):
                     obj.__dict__[k] = valtype(v)
                 else:
                     obj.__dict__[k] = v
-        models.storage.save()
+        storage.save()
 
 
 if __name__ == "__main__":
