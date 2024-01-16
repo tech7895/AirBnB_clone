@@ -4,7 +4,13 @@ import re
 import cmd
 import models
 import shlex
-
+import models.base_model
+import models.user
+import models.state
+import models.city
+import models.place
+import models.amenity
+import models.review
 
 def parse(arg):
     curly_bracesMatch = re.search(r"\{(.*?)\}", arg)
@@ -203,4 +209,4 @@ class my_command(cmd.Cmd):
 
 
 if __name__ == "__main__":
-    my_command().cmdloop(i)
+    my_command().cmdloop()
